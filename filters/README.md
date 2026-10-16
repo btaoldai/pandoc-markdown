@@ -4,9 +4,9 @@ Un filtre Lua transforme l'arbre du document (AST) : il ne touche ni au fichier 
 
 | Filtre | Entrée | Sortie | Dépendance |
 |---|---|---|---|
-| `alertes.lua` | pandoc < 3.2 : citation commençant par `[!NOTE]`… ; pandoc ≥ 3.2 : `Div` de classe `note`, `tip`, `important`, `warning`, `caution` (lecture native) | PDF : bloc Typst coloré à filet gauche ; HTML : `<div class="alerte alerte-note">` ; DOCX : citation ouverte par un libellé français en gras | aucune |
+| `alertes.lua` | pandoc < 3.2 : citation commençant par `[!NOTE]`… ; pandoc ≥ 3.2 : `Div` de classe `note`, `tip`, `important`, `warning`, `caution` (lecture native) | PDF : encart Forge & Lumière (filet gauche 4,5 pt, fond gris) ; HTML : `<div class="alerte alerte-note">` ; DOCX : citation ouverte par un libellé français en gras. Couleurs LEGENDE : NOTE abysse, TIP cyan, IMPORTANT rouille, WARNING ambre, CAUTION rouge | aucune |
 | `mermaid.lua` | Bloc de code `mermaid` | Image SVG (PDF, HTML) ou PNG (DOCX) dans `<dossier de la source>/sortie/mermaid/` | `mmdc` (mermaid-cli) ; sans lui, le bloc reste en code |
-| `mermaid-config.json` | — | Thème et options passés à `mmdc` (`-c`) ; `htmlLabels: false` est **obligatoire** pour que Typst affiche le texte des nœuds | — |
+| `mermaid-config.json` | — | Thème Forge & Lumière **clair** (texte abysse, flèches cyan foncé, nœuds gris) et options passés à `mmdc` (`-c`) ; `htmlLabels: false` est **obligatoire** pour que Typst affiche le texte des nœuds | — |
 
 Tester un filtre seul :
 

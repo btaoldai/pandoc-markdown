@@ -11,6 +11,8 @@ resource-path:
   - .
   - exemples
 toc: false
+# Charte : blocs de code monochromes (fond abysse) — la coloration Typst est désactivée dans kit.typ
+# (ne pas ajouter highlight-style ici : pandoc 3.9 injecterait ses propres couleurs)
 metadata:
   lang: fr
 variables:

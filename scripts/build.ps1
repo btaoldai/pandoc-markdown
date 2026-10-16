@@ -25,6 +25,8 @@ $dossier = Join-Path (Split-Path -Parent $Entree) "sortie"
 New-Item -ItemType Directory -Force -Path $dossier | Out-Null
 # Les schémas Mermaid rendus vont à côté des sorties (lu par filters/mermaid.lua) ; chemin en / pour pandoc
 $env:PANDOC_MERMAID_DIR = (Join-Path $dossier "mermaid") -replace "\\", "/"
+# Polices de la charte (Roboto, Roboto Mono) livrées avec le projet, lues par Typst
+$env:TYPST_FONT_PATHS = Join-Path $racine "templates\fonts"
 
 function Construire([string]$fmt) {
   $cible = Join-Path $dossier "$nom.$fmt"

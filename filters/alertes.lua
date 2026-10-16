@@ -14,10 +14,12 @@ local libelles = {
   warning = "Avertissement", caution = "Attention",
 }
 
--- Couleurs identiques à templates/style.css (palette des alertes GitHub)
+-- Couleurs Forge & Lumière (LEGENDE), identiques à templates/kit.typ et templates/style.css :
+-- NOTE abysse (ton PIÈGE), TIP cyan (POUR ALLER PLUS LOIN), IMPORTANT rouille (DÉMARCHE),
+-- WARNING ambre (PREUVE), CAUTION rouge (erreurs). Les libellés restent génériques.
 local couleurs = {
-  note = "0969da", tip = "1a7f37", important = "8250df",
-  warning = "9a6700", caution = "cf222e",
+  note = "132639", tip = "00B4D8", important = "B85C38",
+  warning = "B7791F", caution = "9B2C2C",
 }
 
 local function sortie(type_, corps)
@@ -29,10 +31,13 @@ local function sortie(type_, corps)
   if FORMAT:match("typst") then
     -- Bloc Typst explicite : rendu identique quelles que soient les versions de pandoc et Typst
     local corps_typst = pandoc.write(pandoc.Pandoc(corps), "typst")
+    -- Encart de la charte : filet gauche épais, cadre fin, fond gris (même dessin que le helper DOCX)
+    local c = 'rgb("#' .. couleurs[type_] .. '")'
     local raw = string.format(
-      '#block(width: 100%%, inset: (x: 10pt, y: 8pt), radius: 3pt, fill: luma(248), ' ..
-      'stroke: (left: 3pt + rgb("#%s")), breakable: false)[\n#text(fill: rgb("#%s"), weight: "bold")[%s]\n\n%s]',
-      couleurs[type_], couleurs[type_], libelles[type_], corps_typst)
+      '#block(width: 100%%, fill: rgb("#EDF2F7"), inset: (left: 10pt, right: 8pt, y: 7pt), breakable: false, ' ..
+      'stroke: (left: 4.5pt + %s, top: 0.5pt + %s, bottom: 0.5pt + %s, right: 0.5pt + %s))[\n' ..
+      '#text(fill: %s, weight: "bold", size: 10pt)[%s]\n#v(2pt)\n#set text(fill: rgb("#132639"), size: 10.5pt)\n%s]',
+      c, c, c, c, c, string.upper(libelles[type_]), corps_typst)
     return pandoc.RawBlock("typst", raw)
   end
   table.insert(corps, 1, titre)

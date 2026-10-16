@@ -4,6 +4,23 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions : [S
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-10-16 — G2 bis charte Forge & Lumière papier
+
+### Ajouté
+- `templates/fonts/` : Roboto (Apache 2.0) et Roboto Mono (SIL OFL 1.1) avec licences ; `TYPST_FONT_PATHS` positionné par les scripts.
+- `docs/adr/0002` : charte Forge & Lumière en version papier (règles et alternatives écartées).
+
+### Modifié
+- `templates/kit.typ` : charte complète — Roboto 11 pt, titres abysse 15 pt à filet cyan / rouille 13 pt, liens cyan foncé sur gris, code monochrome sur fond abysse, tableaux à en-tête abysse, bandeau de titre, pied de page « titre — n / total », marges 1,6 × 1,8 cm ; fonction `encart()` exposée.
+- `templates/reference.docx` : styles Word réglés à la charte (Title, Heading 1-9, Normal, Source Code, Verbatim Char, Hyperlink, marges).
+- `templates/style.css` : même charte pour l'HTML.
+- `filters/alertes.lua` : encarts aux couleurs LEGENDE (NOTE abysse, TIP cyan, IMPORTANT rouille, WARNING ambre, CAUTION rouge), dessin identique au helper DOCX.
+- `filters/mermaid-config.json` : thème clair dérivé de la palette Forge & Lumière.
+- `defaults/pdf.yaml` : plus d'option de coloration (Typst en monochrome via le gabarit ; pandoc 3.9 n'injecte rien par défaut).
+
+### Vérifié
+- `demo.md` avec pandoc 3.1.3 et 3.9.0.1 : Roboto et Roboto Mono embarquées dans le PDF ; aide-mémoire 15 pages, aucun tableau coupé.
+
 ## [0.2.0] — 2026-10-16 — G2 mise en page
 
 ### Ajouté

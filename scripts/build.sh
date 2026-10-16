@@ -16,6 +16,8 @@ dossier="$(dirname "$entree")/sortie"
 mkdir -p "$dossier"
 # Les schémas Mermaid rendus vont à côté des sorties (lu par filters/mermaid.lua)
 export PANDOC_MERMAID_DIR="$dossier/mermaid"
+# Polices de la charte (Roboto, Roboto Mono) livrées avec le projet, lues par Typst
+export TYPST_FONT_PATHS="$racine/templates/fonts"
 
 construire() {
   local fmt="$1"

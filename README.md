@@ -1,6 +1,6 @@
 # pandoc-markdown
 
-Chaîne de production de documents : un fichier **Markdown** (GFM) en entrée, **PDF**, **DOCX** et **HTML** en sortie, avec pandoc, Typst et mermaid-cli. Réglages dans des fichiers, aucune ligne de commande à retenir.
+Chaîne de production de documents : un fichier **Markdown** (GFM) en entrée, **PDF**, **DOCX** et **HTML** en sortie à la charte **Forge & Lumière** (version papier), avec pandoc, Typst et mermaid-cli. Réglages dans des fichiers, aucune ligne de commande à retenir.
 
 ## Ce que c'est
 
@@ -21,6 +21,7 @@ flowchart LR
 - Convertit un `.md` en PDF (moteur Typst, gabarit A4 français), en DOCX (styles d'un `reference.docx`) et en HTML autonome (une page, CSS et images incluses).
 - Rend les **alertes GitHub** (`> [!NOTE]` …) en encadrés portables, et les blocs **Mermaid** en images (SVG pour PDF et HTML, PNG pour DOCX).
 - Conserve tableaux, cases à cocher, notes de bas de page, formules LaTeX, emoji.
+- Applique la charte Forge & Lumière papier (Roboto, palette abysse / cyan / rouille, encarts LEGENDE, code sur fond abysse) aux trois formats ; polices livrées, rendu identique partout ([ADR 0002](docs/adr/0002-charte-forge-lumiere-papier.md)).
 - Un format = un fichier dans `defaults/` ; un style = un fichier dans `templates/`.
 
 Outils comparables : **Pandoc + LaTeX** (référence historique, installation lourde) ; **Quarto** (open source, maintenu, sur-ensemble de pandoc orienté publication scientifique) ; **mdBook** (open source, Rust, sites de documentation) ; **Typst** seul avec le paquet `cmarker` (open source) ; **Marked 2**, **Typora** (propriétaires, export PDF depuis l'éditeur) ; **Obsidian** (export PDF intégré, propriétaire, sans DOCX).
@@ -30,7 +31,7 @@ Outils comparables : **Pandoc + LaTeX** (référence historique, installation lo
 - Pas de PPTX : hors périmètre (les présentations ont leur propre chaîne).
 - Pas de mise en page fine (colonnes, encarts flottants) : Markdown décrit une structure, le gabarit décide du reste.
 - Pas de rendu Mermaid sans `mmdc` : le bloc reste en code et un message le dit.
-- Pas de polices : celles de la machine sont utilisées ; les emoji demandent une police emoji installée.
+- Polices : le PDF embarque Roboto et Roboto Mono (livrées) ; DOCX et HTML utilisent celles du lecteur ; les emoji demandent une police emoji installée.
 - Ne fait pas le café — mais convertirait volontiers la carte des cafés du bar d'en bas en PDF A4, DOCX pour le patron et HTML pour l'ardoise numérique, à partir du même fichier.
 
 ## Installation
@@ -94,7 +95,7 @@ pandoc-markdown/
 ├── CHANGELOG.md              historique des versions
 ├── .env.example              noms des variables reconnues (facultatives)
 ├── defaults/                 un fichier de réglages pandoc par format
-├── templates/                gabarits : kit.typ (PDF), reference.docx, style.css
+├── templates/                gabarits à la charte : kit.typ (PDF), reference.docx, style.css, fonts/
 ├── filters/                  filtres Lua : alertes GitHub, schémas Mermaid
 ├── scripts/                  build.sh, build.ps1
 ├── exemples/                 demo.md (test de non-régression), aide-mémoire Markdown (test de charge)
@@ -120,7 +121,7 @@ scripts/build.sh exemples/demo.md all && scripts/build.sh exemples/aide-memoire-
 | G0 | Cadrage : option A (recettes pandoc), formats PDF + DOCX + HTML, charte neutre puis Forge & Lumière | ✅ |
 | G1 | Squelette : defaults, gabarits, filtres, scripts, exemples, ADR 0001 — les trois formats passent sur `demo.md` | ✅ (vérifié avec pandoc 3.1.3 et 3.9.0.1, Typst 0.14/0.15, mermaid-cli 11/12, Linux et Windows) |
 | G2 | Mise en page : alertes colorées en PDF, pied de page robuste, étiquettes Mermaid, contrôle page par page de l'aide-mémoire | ✅ |
-| G2 bis | Charte Forge & Lumière portée en `kit.typ`, `reference.docx`, `style.css` | ⬜ |
+| G2 bis | Charte Forge & Lumière papier portée en `kit.typ`, `reference.docx`, `style.css`, thème Mermaid clair, polices livrées | ✅ |
 | G3 | Kit documentaire généré par le skill dans `docs/kit-documentaire/` | ⬜ |
 | G4 | Audit indépendant | ⬜ |
 | C | Image conteneur pandoc + typst + mermaid-cli, versions épinglées | ⬜ |

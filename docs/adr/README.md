@@ -5,3 +5,4 @@ Une décision = un fichier `NNNN-titre.md` (contexte, décision, conséquences, 
 | ADR | Décision | Statut |
 |---|---|---|
 | [0001](0001-typst-plutot-que-latex.md) | Typst comme moteur PDF plutôt que LaTeX | accepté |
+| [0002](0002-charte-forge-lumiere-papier.md) | Charte Forge & Lumière en version « papier » | accepté |
