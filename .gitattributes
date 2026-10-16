@@ -1,0 +1,11 @@
+# Fins de ligne normalisées : LF dans le dépôt, quel que soit l'OS (supprime les
+# avertissements « LF will be replaced by CRLF » et les diffs parasites).
+* text=auto eol=lf
+
+# PowerShell 5.1 préfère CRLF ; conservé tel quel
+*.ps1 text eol=crlf
+
+# Binaires
+*.docx binary
+*.png binary
+*.pdf binary

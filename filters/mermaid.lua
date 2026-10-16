@@ -31,9 +31,18 @@ function CodeBlock(el)
   local pup = os.getenv("MERMAID_PUPPETEER_CONFIG")
   if pup and pup ~= "" then table.insert(args, "-p"); table.insert(args, pup) end
 
-  local ok, err = pcall(pandoc.pipe, "mmdc", args, "")
+  -- Windows : mmdc est un script « mmdc.cmd » (npm) que pandoc.pipe ne sait pas lancer
+  -- directement ; on passe par l'interpréteur de commandes.
+  local windows = package.config:sub(1, 1) == "\\"
+  local ok, err
+  if windows then
+    ok, err = pcall(pandoc.pipe, "cmd", { "/c", "mmdc", table.unpack(args) }, "")
+  else
+    ok, err = pcall(pandoc.pipe, "mmdc", args, "")
+  end
   if not ok then
     io.stderr:write("[mermaid.lua] schéma non rendu (mmdc absent ou en erreur) : bloc conservé en code\n")
+    io.stderr:write("[mermaid.lua] détail : " .. tostring(err):gsub("\n", " "):sub(1, 300) .. "\n")
     return nil
   end
 

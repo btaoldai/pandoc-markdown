@@ -13,6 +13,9 @@ param(
   [ValidateSet("pdf", "docx", "html", "all")][string]$Format = "all"
 )
 $ErrorActionPreference = "Stop"
+# Messages des filtres (pandoc écrit en UTF-8) lisibles dans la console PowerShell 5.1
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
 $racine = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Set-Location $racine
 

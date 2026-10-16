@@ -4,6 +4,17 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions : [S
 
 ## [Unreleased]
 
+## [0.1.2] — 2026-10-16 — retours du premier essai Windows
+
+### Corrigé
+- `filters/mermaid.lua` : sous Windows, `mmdc` est lancé via `cmd /c` (le binaire npm est un script `.cmd` que `pandoc.pipe` ne trouvait pas) ; le détail de l'erreur est affiché.
+- `templates/kit.typ` : une seule police de repli, `Libertinus Serif` (embarquée dans Typst) — plus d'avertissement « unknown font family ».
+- `defaults/html.yaml` : formules rendues en MathML (`html-math-method: mathml`) au lieu de la conversion « plain » qui échouait sur `\frac`, `\sqrt`.
+- `scripts/build.ps1` : console en UTF-8, accents corrects dans les messages des filtres.
+
+### Ajouté
+- `.gitattributes` : LF normalisé dans le dépôt, CRLF pour `.ps1`, `.docx` en binaire.
+
 ## [0.1.1] — 2026-10-16 — compatibilité pandoc 3.9
 
 ### Modifié

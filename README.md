@@ -60,7 +60,7 @@ typst --version
 mmdc --version
 ```
 
-> attendu : `pandoc 3.x`, `typst 0.1x`, `11.x` (ou plus récents).
+> attendu : `pandoc 3.x`, `typst 0.1x`, `12.x` (ou plus récents).
 
 ## Usage
 
@@ -118,7 +118,7 @@ scripts/build.sh exemples/demo.md all && scripts/build.sh exemples/aide-memoire-
 | Gate | Livrable | État |
 |---|---|---|
 | G0 | Cadrage : option A (recettes pandoc), formats PDF + DOCX + HTML, charte neutre puis Forge & Lumière | ✅ |
-| G1 | Squelette : defaults, gabarits, filtres, scripts, exemples, ADR 0001 — les trois formats passent sur `demo.md` | ✅ (vérifié avec pandoc 3.1.3 **et** 3.9.0.1, Typst 0.14/0.15, mermaid-cli 11) |
+| G1 | Squelette : defaults, gabarits, filtres, scripts, exemples, ADR 0001 — les trois formats passent sur `demo.md` | ✅ (vérifié avec pandoc 3.1.3 et 3.9.0.1, Typst 0.14/0.15, mermaid-cli 11/12, Linux et Windows) |
 | G2 | Recettes : alertes natives pandoc ≥ 3.2, formules Typst, polices, contrôle visuel page par page | ⬜ |
 | G2 bis | Charte Forge & Lumière portée en `kit.typ`, `reference.docx`, `style.css` | ⬜ |
 | G3 | Kit documentaire généré par le skill dans `docs/kit-documentaire/` | ⬜ |

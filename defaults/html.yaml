@@ -14,5 +14,9 @@ resource-path:
   - exemples
 toc: true
 toc-depth: 3
+# Formules : MathML natif (sans réseau, sans script) ; la méthode par défaut « plain »
+# échoue sur \frac, \sqrt… et laisse le TeX brut
+html-math-method:
+  method: mathml
 metadata:
   lang: fr

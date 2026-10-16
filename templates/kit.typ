@@ -28,8 +28,9 @@
   paper: "a4",
   lang: "fr",
   region: "FR",
-  // Liste de repli : Typst prend la première police installée ; -V mainfont la remplace
-  font: ("Libertinus Serif", "Linux Libertine", "Noto Serif", "DejaVu Serif"),
+  // Police par défaut : Libertinus Serif est embarquée dans Typst (aucune installation) ;
+  // -V mainfont="…" la remplace. Une famille absente provoque un avertissement Typst.
+  font: ("Libertinus Serif",),
   fontsize: 10.5pt,
   mathfont: none,
   codefont: none,
