@@ -4,6 +4,20 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions : [S
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-10-16 — G2 mise en page
+
+### Ajouté
+- Les sorties sont écrites **à côté de leur source** (`exemples/demo.md` → `exemples/sortie/demo.pdf`), schémas Mermaid compris ; `sortie/` reste ignoré par Git à tout niveau.
+- Liens repérables en PDF et HTML : texte bleu sur fond gris léger (`kit.typ`, `style.css`).
+- `filters/alertes.lua` : en sortie PDF, chaque alerte GitHub devient un bloc Typst coloré à filet gauche (mêmes couleurs que `style.css`), identique quelles que soient les versions de pandoc et de Typst.
+
+### Modifié
+- `templates/kit.typ` : pied de page « n / total » imposé, que pandoc transmette `none` (3.1) ou `"1"` (3.9) ; citations ordinaires rendues par une règle `show` explicite.
+- `filters/mermaid-config.json` : `flowchart.wrappingWidth` à 320 px, les étiquettes de nœuds ne sont plus coupées en deux.
+
+### Vérifié
+- `demo.md` avec pandoc 3.1.3 et 3.9.0.1 ; aide-mémoire (15 p.) : aucun tableau coupé, aucune page quasi vide, numérotation complète.
+
 ## [0.1.2] — 2026-10-16 — retours du premier essai Windows
 
 ### Corrigé

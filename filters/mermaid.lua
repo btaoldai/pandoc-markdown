@@ -1,8 +1,9 @@
 -- filters/mermaid.lua — rend les blocs ```mermaid en image avec mermaid-cli (mmdc)
 --
--- Sortie : SVG pour PDF (Typst) et HTML, PNG pour DOCX. Thème et options Mermaid
+-- Sortie : SVG pour PDF (Typst) et HTML, PNG pour DOCX, dans le dossier PANDOC_MERMAID_DIR
+-- (les scripts le fixent à <dossier de la source>/sortie/mermaid ; défaut : sortie/mermaid). Thème et options Mermaid
 -- dans filters/mermaid-config.json (htmlLabels désactivé : obligatoire pour Typst). Les images sont écrites dans
--- sortie/mermaid/<empreinte>.<ext> (empreinte SHA-1 du bloc : un schéma inchangé
+-- <dossier>/<empreinte>.<ext> (empreinte SHA-1 du bloc : un schéma inchangé
 -- n'est pas re-rendu). Sans mmdc, le bloc est conservé en code et un message
 -- l'indique sur la sortie d'erreur : la génération continue.
 --

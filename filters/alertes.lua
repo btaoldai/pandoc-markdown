@@ -4,8 +4,9 @@
 --   • pandoc < 3.2 : simple citation dont la première ligne est le texte « [!NOTE] » ;
 --   • pandoc ≥ 3.2 : Div de classe note|tip|important|warning|caution contenant un
 --     Div « title » puis le corps (lecture native des alertes GitHub).
--- Sortie, identique dans les deux cas : une citation ouverte par un libellé français en
--- gras (PDF, DOCX) ; en HTML, un <div class="alerte alerte-note"> stylé par style.css.
+-- Sortie, identique dans les deux cas : en PDF (Typst) un bloc coloré à filet gauche ;
+-- en HTML un <div class="alerte alerte-note"> stylé par style.css ; en DOCX et ailleurs
+-- une citation ouverte par un libellé français en gras.
 -- Un bloc non reconnu est rendu tel quel (jamais d'erreur).
 
 local libelles = {
@@ -13,12 +14,28 @@ local libelles = {
   warning = "Avertissement", caution = "Attention",
 }
 
+-- Couleurs identiques à templates/style.css (palette des alertes GitHub)
+local couleurs = {
+  note = "0969da", tip = "1a7f37", important = "8250df",
+  warning = "9a6700", caution = "cf222e",
+}
+
 local function sortie(type_, corps)
   local titre = pandoc.Para({ pandoc.Strong({ pandoc.Str(libelles[type_] .. " :") }) })
-  table.insert(corps, 1, titre)
   if FORMAT:match("html") then
+    table.insert(corps, 1, titre)
     return pandoc.Div(corps, pandoc.Attr("", { "alerte", "alerte-" .. type_ }))
   end
+  if FORMAT:match("typst") then
+    -- Bloc Typst explicite : rendu identique quelles que soient les versions de pandoc et Typst
+    local corps_typst = pandoc.write(pandoc.Pandoc(corps), "typst")
+    local raw = string.format(
+      '#block(width: 100%%, inset: (x: 10pt, y: 8pt), radius: 3pt, fill: luma(248), ' ..
+      'stroke: (left: 3pt + rgb("#%s")), breakable: false)[\n#text(fill: rgb("#%s"), weight: "bold")[%s]\n\n%s]',
+      couleurs[type_], couleurs[type_], libelles[type_], corps_typst)
+    return pandoc.RawBlock("typst", raw)
+  end
+  table.insert(corps, 1, titre)
   return pandoc.BlockQuote(corps)
 end
 

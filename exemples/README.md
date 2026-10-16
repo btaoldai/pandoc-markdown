@@ -9,4 +9,4 @@
 scripts/build.sh exemples/demo.md all
 ```
 
-> attendu : `sortie/demo.pdf`, `sortie/demo.docx`, `sortie/demo.html`, et `sortie/mermaid/` contenant le schéma rendu.
+> attendu : `exemples/sortie/demo.pdf`, `demo.docx`, `demo.html`, et `exemples/sortie/mermaid/` contenant le schéma rendu. Le dossier `sortie/` n'est pas versionné.

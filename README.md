@@ -9,9 +9,9 @@ Un dépôt de réglages pandoc (`defaults/`), de gabarits (`templates/`), de fil
 ```mermaid
 flowchart LR
   MD[fichier.md] --> P[pandoc]
-  P -- defaults/pdf.yaml + kit.typ --> T[Typst] --> PDF[(fichier.pdf)]
-  P -- defaults/docx.yaml + reference.docx --> DOCX[(fichier.docx)]
-  P -- defaults/html.yaml + style.css --> HTML[(fichier.html)]
+  P -- defaults/pdf.yaml + kit.typ --> T[Typst] --> PDF[(sortie/fichier.pdf)]
+  P -- defaults/docx.yaml + reference.docx --> DOCX[(sortie/fichier.docx)]
+  P -- defaults/html.yaml + style.css --> HTML[(sortie/fichier.html)]
   F1[filters/alertes.lua] -.-> P
   F2[filters/mermaid.lua + mmdc] -.-> P
 ```
@@ -72,9 +72,9 @@ scripts/build.sh exemples/demo.md all
 .\scripts\build.ps1 exemples\demo.md -Format all
 ```
 
-> attendu : `sortie/demo.pdf`, `sortie/demo.docx`, `sortie/demo.html` ; schémas rendus dans `sortie/mermaid/`.
+> attendu : `exemples/sortie/demo.pdf`, `exemples/sortie/demo.docx`, `exemples/sortie/demo.html` ; schémas rendus dans `exemples/sortie/mermaid/`.
 
-Sans script : `pandoc -d defaults/pdf.yaml fichier.md -o sortie/fichier.pdf`, depuis la racine du projet.
+Sans script : `pandoc -d defaults/pdf.yaml dossier/fichier.md -o dossier/sortie/fichier.pdf`, depuis la racine du projet. Règle : **une sortie vit à côté de sa source**, dans un sous-dossier `sortie/` (jamais versionné).
 
 Titre, auteur et date se donnent en tête du fichier Markdown :
 
@@ -100,7 +100,7 @@ pandoc-markdown/
 ├── exemples/                 demo.md (test de non-régression), aide-mémoire Markdown (test de charge)
 ├── docs/adr/                 décisions d'architecture
 ├── docs/kit-documentaire/    kit documentaire PDF (généré)
-└── sortie/                   fichiers produits — non versionnés
+└── <dossier>/sortie/         fichiers produits, à côté de leur source — non versionnés
 ```
 
 Chaque dossier a son README.
@@ -119,7 +119,7 @@ scripts/build.sh exemples/demo.md all && scripts/build.sh exemples/aide-memoire-
 |---|---|---|
 | G0 | Cadrage : option A (recettes pandoc), formats PDF + DOCX + HTML, charte neutre puis Forge & Lumière | ✅ |
 | G1 | Squelette : defaults, gabarits, filtres, scripts, exemples, ADR 0001 — les trois formats passent sur `demo.md` | ✅ (vérifié avec pandoc 3.1.3 et 3.9.0.1, Typst 0.14/0.15, mermaid-cli 11/12, Linux et Windows) |
-| G2 | Recettes : alertes natives pandoc ≥ 3.2, formules Typst, polices, contrôle visuel page par page | ⬜ |
+| G2 | Mise en page : alertes colorées en PDF, pied de page robuste, étiquettes Mermaid, contrôle page par page de l'aide-mémoire | ✅ |
 | G2 bis | Charte Forge & Lumière portée en `kit.typ`, `reference.docx`, `style.css` | ⬜ |
 | G3 | Kit documentaire généré par le skill dans `docs/kit-documentaire/` | ⬜ |
 | G4 | Audit indépendant | ⬜ |

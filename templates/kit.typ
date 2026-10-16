@@ -46,7 +46,9 @@
   set page(
     paper: paper,
     margin: margin,
-    numbering: if pagenumbering == none { "1 / 1" } else { pagenumbering },
+    // pandoc passe `none` (3.1) ou "1" (3.9) selon la version : on impose « n / total »
+    // sauf si l'auteur a choisi explicitement autre chose (-V page-numbering=…)
+    numbering: if pagenumbering == none or pagenumbering == "1" { "1 / 1" } else { pagenumbering },
     number-align: center,
     columns: cols,
   )
@@ -56,7 +58,9 @@
   show math.equation: set text(font: mathfont) if mathfont != none
   show raw: set text(font: codefont) if codefont != none
   set heading(numbering: sectionnumbering)
-  show link: set text(fill: rgb(content-to-string(linkcolor))) if linkcolor != none
+  // Liens : texte bleu sur fond gris léger, repérables à l'impression comme à l'écran
+  show link: it => box(fill: luma(240), inset: (x: 2pt, y: 1pt), radius: 2pt, outset: (y: 1pt),
+    text(fill: if linkcolor != none { rgb(content-to-string(linkcolor)) } else { rgb("#0b5fa5") }, it))
 
   // Aération : pas de tableau ni de figure coupé entre deux pages
   show table: set block(breakable: false)
@@ -73,8 +77,8 @@
   show heading.where(level: 1): set text(size: 1.6em)
   show heading.where(level: 2): set text(size: 1.3em)
 
-  // Encadrés d'alerte (filters/alertes.lua produit une citation ouverte par un libellé en gras)
-  show quote.where(block: true): set block(stroke: (left: 2pt + luma(170)), inset: (left: 1em, y: 0.4em))
+  // Citations ordinaires : retrait et filet gris (les alertes GitHub ont leur propre bloc, voir filters/alertes.lua)
+  show quote.where(block: true): it => block(inset: (left: 1em, y: 0.4em), stroke: (left: 2pt + luma(170)), width: 100%, it.body)
 
   if title != none {
     align(center)[#block(inset: (y: 1.5em))[
