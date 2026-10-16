@@ -1,0 +1,19 @@
+# defaults/pdf.yaml — Markdown (GFM) → PDF via Typst
+# Usage : pandoc -d defaults/pdf.yaml fichier.md -o sortie/fichier.pdf
+# Le gabarit Typst natif de pandoc est conservé ; il importe notre module `conf`
+# (variable `template`), ce qui reste valable de pandoc 3.1.2 à 3.9.
+from: gfm
+pdf-engine: typst
+filters:
+  - filters/alertes.lua
+  - filters/mermaid.lua
+resource-path:
+  - .
+  - exemples
+toc: false
+metadata:
+  lang: fr
+variables:
+  template: templates/kit.typ
+  papersize: a4
+  # mainfont: "Liberation Sans"   # décommenter si une police précise est installée

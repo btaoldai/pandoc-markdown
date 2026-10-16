@@ -1,0 +1,27 @@
+/* templates/style.css — feuille neutre pour la sortie HTML (G1). Imprimable en A4. */
+:root { --encre: #1c1c1c; --fond: #ffffff; --gris: #f4f4f4; --bord: #cfcfcf; --lien: #0b5fa5; }
+html { font-family: system-ui, "Segoe UI", Roboto, sans-serif; font-size: 16px; line-height: 1.55; color: var(--encre); background: var(--fond); }
+body { max-width: 56rem; margin: 2rem auto; padding: 0 1rem; }
+h1, h2, h3, h4 { line-height: 1.25; margin-top: 2.2em; break-after: avoid; }
+h1 { font-size: 1.9rem; } h2 { font-size: 1.45rem; border-bottom: 1px solid var(--bord); padding-bottom: .2em; } h3 { font-size: 1.2rem; }
+a { color: var(--lien); }
+code, pre, kbd { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .92em; }
+code { background: var(--gris); padding: .1em .3em; border-radius: 3px; }
+pre { background: var(--gris); border: 1px solid var(--bord); padding: .8em 1em; overflow-x: auto; border-radius: 4px; }
+pre code { background: none; padding: 0; }
+kbd { border: 1px solid var(--bord); border-bottom-width: 2px; padding: 0 .35em; border-radius: 3px; background: #fafafa; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; break-inside: avoid; font-size: .95em; }
+th, td { border: 1px solid var(--bord); padding: .4em .6em; vertical-align: top; }
+th { background: var(--gris); text-align: left; }
+blockquote { margin: 1em 0; padding: .4em 1em; border-left: 4px solid var(--bord); color: #444; }
+img, svg { max-width: 100%; height: auto; }
+figure { margin: 1em 0; text-align: center; break-inside: avoid; }
+hr { border: 0; border-top: 1px solid var(--bord); margin: 2em 0; }
+#TOC { background: var(--gris); padding: 1em 1.5em; border-radius: 4px; }
+#TOC ul { list-style: none; padding-left: 1em; }
+/* Alertes GitHub converties par filters/alertes.lua */
+.alerte { margin: 1em 0; padding: .6em 1em; border-left: 4px solid #888; background: #fafafa; border-radius: 0 4px 4px 0; }
+.alerte p:first-child { margin-top: 0; }
+.alerte-note { border-color: #0969da; } .alerte-tip { border-color: #1a7f37; } .alerte-important { border-color: #8250df; }
+.alerte-warning { border-color: #9a6700; } .alerte-caution { border-color: #cf222e; }
+@media print { body { margin: 0; max-width: none; } a { color: inherit; text-decoration: none; } #TOC { break-after: page; } }

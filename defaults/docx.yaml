@@ -1,0 +1,14 @@
+# defaults/docx.yaml — Markdown (GFM) → DOCX
+# Usage : pandoc -d defaults/docx.yaml fichier.md -o sortie/fichier.docx
+from: gfm
+to: docx
+reference-doc: templates/reference.docx
+filters:
+  - filters/alertes.lua
+  - filters/mermaid.lua
+resource-path:
+  - .
+  - exemples
+toc: false
+metadata:
+  lang: fr

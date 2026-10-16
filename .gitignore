@@ -1,0 +1,15 @@
+# Sorties générées : jamais versionnées
+sortie/
+*.pdf
+*.docx
+*.html
+!templates/reference.docx
+
+# Secrets et réglages locaux
+.env
+*.local.*
+
+# Outils
+node_modules/
+.DS_Store
+Thumbs.db

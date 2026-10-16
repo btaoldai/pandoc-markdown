@@ -1,0 +1,18 @@
+# defaults/html.yaml — Markdown (GFM) → HTML autonome (une seule page, ressources incluses)
+# Usage : pandoc -d defaults/html.yaml fichier.md -o sortie/fichier.html
+from: gfm
+to: html5
+standalone: true
+embed-resources: true
+css:
+  - templates/style.css
+filters:
+  - filters/alertes.lua
+  - filters/mermaid.lua
+resource-path:
+  - .
+  - exemples
+toc: true
+toc-depth: 3
+metadata:
+  lang: fr
