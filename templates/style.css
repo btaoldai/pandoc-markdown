@@ -4,7 +4,7 @@ html { font-family: system-ui, "Segoe UI", Roboto, sans-serif; font-size: 16px; 
 body { max-width: 56rem; margin: 2rem auto; padding: 0 1rem; }
 h1, h2, h3, h4 { line-height: 1.25; margin-top: 2.2em; break-after: avoid; }
 h1 { font-size: 1.9rem; } h2 { font-size: 1.45rem; border-bottom: 1px solid var(--bord); padding-bottom: .2em; } h3 { font-size: 1.2rem; }
-a { color: var(--lien); }
+a { color: var(--lien); background: var(--gris); padding: 0 .15em; border-radius: 2px; text-decoration-color: #9ec2e6; }
 code, pre, kbd { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .92em; }
 code { background: var(--gris); padding: .1em .3em; border-radius: 3px; }
 pre { background: var(--gris); border: 1px solid var(--bord); padding: .8em 1em; overflow-x: auto; border-radius: 4px; }

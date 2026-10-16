@@ -4,8 +4,8 @@ Un filtre Lua transforme l'arbre du document (AST) : il ne touche ni au fichier 
 
 | Filtre | Entrée | Sortie | Dépendance |
 |---|---|---|---|
-| `alertes.lua` | pandoc < 3.2 : citation commençant par `[!NOTE]`… ; pandoc ≥ 3.2 : `Div` de classe `note`, `tip`, `important`, `warning`, `caution` (lecture native) | Citation avec libellé français en gras ; en HTML, `<div class="alerte alerte-note">` | aucune |
-| `mermaid.lua` | Bloc de code `mermaid` | Image SVG (PDF, HTML) ou PNG (DOCX) dans `sortie/mermaid/` | `mmdc` (mermaid-cli) ; sans lui, le bloc reste en code |
+| `alertes.lua` | pandoc < 3.2 : citation commençant par `[!NOTE]`… ; pandoc ≥ 3.2 : `Div` de classe `note`, `tip`, `important`, `warning`, `caution` (lecture native) | PDF : bloc Typst coloré à filet gauche ; HTML : `<div class="alerte alerte-note">` ; DOCX : citation ouverte par un libellé français en gras | aucune |
+| `mermaid.lua` | Bloc de code `mermaid` | Image SVG (PDF, HTML) ou PNG (DOCX) dans `<dossier de la source>/sortie/mermaid/` | `mmdc` (mermaid-cli) ; sans lui, le bloc reste en code |
 | `mermaid-config.json` | — | Thème et options passés à `mmdc` (`-c`) ; `htmlLabels: false` est **obligatoire** pour que Typst affiche le texte des nœuds | — |
 
 Tester un filtre seul :

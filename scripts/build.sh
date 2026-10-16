@@ -2,7 +2,7 @@
 # scripts/build.sh — Markdown → PDF | DOCX | HTML avec les réglages de defaults/
 #
 # Usage : scripts/build.sh <fichier.md> [pdf|docx|html|all]
-# Sortie : sortie/<nom>.<ext>
+# Sortie : <dossier du fichier>/sortie/<nom>.<ext>  (ex. exemples/demo.md → exemples/sortie/demo.pdf)
 # Prérequis : pandoc ≥ 3.1.2, typst (PDF), mmdc (schémas, facultatif)
 set -euo pipefail
 
@@ -12,12 +12,15 @@ cd "$racine"
 entree="${1:?usage : scripts/build.sh <fichier.md> [pdf|docx|html|all]}"
 format="${2:-all}"
 nom="$(basename "${entree%.*}")"
-mkdir -p sortie
+dossier="$(dirname "$entree")/sortie"
+mkdir -p "$dossier"
+# Les schémas Mermaid rendus vont à côté des sorties (lu par filters/mermaid.lua)
+export PANDOC_MERMAID_DIR="$dossier/mermaid"
 
 construire() {
   local fmt="$1"
-  echo "[build] ${nom}.${fmt}"
-  pandoc -d "defaults/${fmt}.yaml" "$entree" -o "sortie/${nom}.${fmt}"
+  echo "[build] ${dossier}/${nom}.${fmt}"
+  pandoc -d "defaults/${fmt}.yaml" "$entree" -o "${dossier}/${nom}.${fmt}"
 }
 
 case "$format" in
@@ -26,4 +29,4 @@ case "$format" in
   *) echo "format inconnu : $format (pdf | docx | html | all)" >&2; exit 2 ;;
 esac
 
-ls -l "sortie/${nom}".* | sed 's/^/[build] /'
+ls -l "${dossier}/${nom}".* | sed 's/^/[build] /'

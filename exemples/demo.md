@@ -27,7 +27,7 @@ Texte avec **gras**, *italique*, ~~barré~~, `code`, un lien vers [la documentat
 ### Code
 
 ```bash
-pandoc -d defaults/pdf.yaml exemples/demo.md -o sortie/demo.pdf
+pandoc -d defaults/pdf.yaml exemples/demo.md -o exemples/sortie/demo.pdf
 ```
 
 ### Alerte

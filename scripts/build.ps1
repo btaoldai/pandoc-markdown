@@ -6,7 +6,8 @@
 .EXAMPLE
   .\scripts\build.ps1 exemples\demo.md        # les trois formats
 .NOTES
-  Sortie : sortie\<nom>.<ext>. Prérequis : pandoc >= 3.1.2, typst (PDF), mmdc (schémas, facultatif).
+  Sortie : <dossier du fichier>\sortie\<nom>.<ext> (ex. exemples\demo.md → exemples\sortie\demo.pdf).
+  Prérequis : pandoc >= 3.1.2, typst (PDF), mmdc (schémas, facultatif).
 #>
 param(
   [Parameter(Mandatory = $true)][string]$Entree,
@@ -20,11 +21,15 @@ $racine = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Set-Location $racine
 
 $nom = [System.IO.Path]::GetFileNameWithoutExtension($Entree)
-New-Item -ItemType Directory -Force -Path "sortie" | Out-Null
+$dossier = Join-Path (Split-Path -Parent $Entree) "sortie"
+New-Item -ItemType Directory -Force -Path $dossier | Out-Null
+# Les schémas Mermaid rendus vont à côté des sorties (lu par filters/mermaid.lua) ; chemin en / pour pandoc
+$env:PANDOC_MERMAID_DIR = (Join-Path $dossier "mermaid") -replace "\\", "/"
 
 function Construire([string]$fmt) {
-  Write-Host "[build] $nom.$fmt"
-  & pandoc -d "defaults/$fmt.yaml" $Entree -o "sortie/$nom.$fmt"
+  $cible = Join-Path $dossier "$nom.$fmt"
+  Write-Host "[build] $cible"
+  & pandoc -d "defaults/$fmt.yaml" $Entree -o $cible
   if ($LASTEXITCODE -ne 0) { throw "pandoc a échoué pour $fmt" }
 }
 
@@ -32,4 +37,4 @@ switch ($Format) {
   "all" { Construire "pdf"; Construire "docx"; Construire "html" }
   default { Construire $Format }
 }
-Get-ChildItem "sortie/$nom.*" | ForEach-Object { Write-Host "[build] $($_.Name)  $($_.Length) octets" }
+Get-ChildItem (Join-Path $dossier "$nom.*") | ForEach-Object { Write-Host "[build] $($_.Name)  $($_.Length) octets" }
